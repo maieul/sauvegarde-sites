@@ -12,7 +12,7 @@ def ssh(site):
 
 	options = '--progress  --delete-after -vrza -e ssh '
 	
-	destination = os.path.join(config.dossier,site["dossier"])
+	destination_commune = os.path.join(config.dossier,site["dossier"])
 	# indiquer les exclusions
 	for ex in site['exclure']:
 		options = options + "--exclude=\"" +ex + "\" "
@@ -23,11 +23,16 @@ def ssh(site):
 	
 	# l'executer sur chaque dossier
 	for recup in site['recuperation']:
-		if recup[-1] == '/':
-			recup = recup[:-1]
+		# pour avoir bien l'arbo complète en local
+		if recup[-1] != '/':
+			recup += '/'
+		destination = os.path.join(destination_commune,recup)
+		outils.creer_dossier(destination)
+		
 		requete = requete_base + os.path.join(site['base'],recup) + " " + destination
+		
 		print ("Récup de " + site["dossier"] + " : " + recup)
-		resultats[recup] = os.system(requete)
+		#resultats[recup] = os.system(requete)
 	
 	return resultats
 
