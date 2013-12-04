@@ -12,14 +12,17 @@ def pwd(serveur,login):
 		set_password(serveur,login,pwd)
 	return pwd
 	
-def afficher_erreurs(erreurs):
-	'''Affiche l'ensemble des sites ou dossier avec des erreurs'''
+def afficher_resultats(resultats):
+	'''Affiche le résultat pour l'ensemble des sites'''
 
 	print "\n****\n"
-	for site in erreurs:
-		print "Erreur sur " + site + " :"
-		for recup in erreurs[site]:
-			print "\t " + recup + " : " + str(erreurs[site][recup])
+	for site in resultats:
+		print ("Résultats sur " + site + " :")
+		for recup in resultats[site]:
+			if (resultats[site][recup]!=0):# une erreur
+				print ("\t " + recup + " : " + str(resultats[site][recup]))
+			else:
+				print ("\t " + recup + " OK")
 
 
 def creer_dossier(chemin):

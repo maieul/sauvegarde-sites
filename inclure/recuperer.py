@@ -7,7 +7,7 @@ import outils
 
 def ssh(site):
 	''' récupere le contenu d'un site via SSH (rsync)'''
-	
+	resultats = {}
 	# vérifier que le base est écrite correctement
 
 	options = '--progress  --delete-after -vrza -e ssh '
@@ -22,22 +22,19 @@ def ssh(site):
 	requete_base = "rsync " + options + site["login"] + "@" + site["serveur"] + ":" 
 	
 	# l'executer sur chaque dossier
-	erreurs = {}
 	for recup in site['recuperation']:
 		if recup[-1] == '/':
 			recup = recup[:-1]
 		requete = requete_base + os.path.join(site['base'],recup) + " " + destination
 		print ("Récup de " + site["dossier"] + " : " + recup)
-		resultat = os.system(requete)
-		if resultat!=0:
-			erreurs[recup] = resultat
+		resultats[recup] = os.system(requete)
 	
-	# retourner les erreurs éventuelles
-	return erreurs
+	return resultats
 
 def ftp(site):
 	'''récupere le contenu d'un site via ftp ou ftps (lftp)'''
 	
+	resultats={}
 	# récupération du mot de passe, interrogation le cas échéant
 	from keyring import get_password,set_password
 	print (site['serveur'],site['login'])
@@ -61,9 +58,6 @@ def ftp(site):
 		req += "-O " + recup + ";"
 		req += "\""
 		print ("Récup de " + site["dossier"] + " : " + recup)
-		resultat = os.system(req)
-		if resultat!=0:
-			erreurs[recup] = resultat
+		resultats[recup] = os.system(req)
 	
-	# retourner les erreurs éventuelles
-	return erreurs
+	return resultats

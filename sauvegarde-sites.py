@@ -27,7 +27,7 @@ def main():
 	
 	
 	#2a
-	erreurs = {}
+	resultats = {}
 	for site in config.sites:
 		resultat={}
 		creer_dossier (os.path.join(config.dossier,site["dossier"]))
@@ -37,9 +37,8 @@ def main():
 		elif site['mode'].upper() == 'FTP':
 			resultat = recuperer.ftp(site)
 		
-		if resultat!={}:
-			erreurs[site["dossier"]] = resultat
+		resultats[site["dossier"]] = resultat
 	
-	afficher_erreurs(erreurs)
+	afficher_resultats(resultats)
 
 main()
