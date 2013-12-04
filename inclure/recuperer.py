@@ -32,7 +32,7 @@ def ssh(site):
 		requete = requete_base + os.path.join(site['base'],recup) + " " + destination
 		
 		print ("Récup de " + site["dossier"] + " : " + recup)
-		#resultats[recup] = os.system(requete)
+		resultats[recup] = os.system(requete)
 	
 	return resultats
 
@@ -63,5 +63,5 @@ def ftp(site):
 		req += "\""
 		print ("Récup de " + site["dossier"] + " : " + recup)
 		resultats[recup] = os.system(req)
-	
+		
 	return resultats
