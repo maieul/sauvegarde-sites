@@ -8,7 +8,7 @@ sites=[
 	
 	'base':'emplacement sur le serveur ssh',
 	'recuperation':('IMG','tmp/dump'),
-	'exclure':('article_PDF','distant','.ok'),
+	'exclure':('article_PDF','distant','.svn','.ok'),
 	
 	'dossier':'nom du dossier local'
 },
@@ -20,7 +20,7 @@ sites=[
 	
 	'base':'emplacement sur le serveur ftp',
 	'recuperation':('IMG','tmp/dump'),
-	'exclure':('article_PDF','distant','.ok'),
+	'exclure':('article_PDF','distant','.svn','.ok'),
 	
 	'dossier':'nom du dossier local'
 }
