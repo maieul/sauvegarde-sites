@@ -2,6 +2,16 @@
 # -*- coding: utf-8 -*-
 import os
 import config
+from keyring import get_password,set_password
+
+def pwd(serveur,login):
+	"""Retourne le mdp associé au serveur / login, ou a défaut le demande"""
+	pwd  = get_password("sauvegarde " + serveur,login)
+	if pwd==None :
+		pwd = raw_input("Mot de passe "+login + "@" + serveur + " ? ")
+		set_password(serveur,login,pwd)
+	return pwd
+	
 def afficher_erreurs(erreurs):
 	'''Affiche l'ensemble des sites ou dossier avec des erreurs'''
 

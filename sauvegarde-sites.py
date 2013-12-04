@@ -31,8 +31,11 @@ def main():
 	for site in config.sites:
 		resultat={}
 		creer_dossier (os.path.join(config.dossier,site["dossier"]))
+		
 		if site['mode'].upper() == 'SSH':
 			resultat = recuperer.ssh(site)
+		elif site['mode'].upper() == 'FTP':
+			resultat = recuperer.ftp(site)
 		
 		if resultat!={}:
 			erreurs[site["dossier"]] = resultat
