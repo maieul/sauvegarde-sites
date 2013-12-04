@@ -37,7 +37,6 @@ def ftp(site):
 	resultats={}
 	# récupération du mot de passe, interrogation le cas échéant
 	from keyring import get_password,set_password
-	print (site['serveur'],site['login'])
 	pwd = outils.pwd(site['serveur'],site['login'])
 	
 	# paramètre globaux
