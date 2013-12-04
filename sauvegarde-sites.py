@@ -29,6 +29,7 @@ def main():
 	#2a
 	erreurs = {}
 	for site in config.sites:
+		resultat={}
 		creer_dossier (os.path.join(config.dossier,site["dossier"]))
 		if site['mode'].upper() == 'SSH':
 			resultat = recuperer.ssh(site)
