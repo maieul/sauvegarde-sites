@@ -25,13 +25,28 @@ def recuperer_ssh(site):
 	requete_base = "rsync " + options + site["login"] + "@" + site["serveur"] + ":" 
 	
 	# l'executer sur chaque dossier
-
+	erreurs = {}
 	for recup in site['recuperation']:
 		if recup[-1] == '/':
 			recup = recup[:-1]
 		requete = requete_base + os.path.join(site['base'],recup) + " " + destination
 		print ("Récup de " + site["dossier"] + " : " + recup)
-		os.system(requete)s
+		resultat = os.system(requete)
+		if resultat!=0:
+			erreurs[recup] = resultat
+	
+	# retourner les erreurs éventuelles
+	return erreurs
+
+def afficher_erreurs(erreurs):
+	'''Affiche l'ensemble des sites ou dossier avec des erreurs'''
+
+	print "\n****\n"
+	for site in erreurs:
+		print "Erreur sur " + site + " :"
+		for recup in erreurs[site]:
+			print "\t " + recup + " : " + str(erreurs[site][recup])
+
 
 def creer_dossier(chemin):
 	''' Crée un dossier, si non existant, à partir d'un chemin'''
@@ -42,6 +57,10 @@ def creer_dossier(chemin):
 		pass
 	except:
 		print ("Erreur inconnue lors de la création de " + chemin + " " + sys.exc_info()[0])	
+
+
+
+
 	
 def main():
 	'''Fonction principale, qui se contente de 
@@ -49,6 +68,7 @@ def main():
 		2. Tourner sur l'ensemble des sites, pour 
 			a. Créer si besoin le dossier
 			b. Appeler ensuite la fonction ad hoc
+		3. Appeler l'affichage des erreurs
 	'''
 	
 	#1 
@@ -56,9 +76,15 @@ def main():
 	
 	
 	#2a
+	erreurs = {}
 	for site in config.sites:
 		creer_dossier (os.path.join(config.dossier,site["dossier"]))
 		if site['mode'].upper() == 'SSH':
-			recuperer_ssh(site)
+			resultat = recuperer_ssh(site)
+		
+		if resultat!={}:
+			erreurs[site["dossier"]] = resultat
+	
+	afficher_erreurs(erreurs)
 
 main()
