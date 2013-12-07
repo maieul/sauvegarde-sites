@@ -10,7 +10,7 @@ def ssh(site):
 	resultats = {}
 	# vérifier que le base est écrite correctement
 
-	options = '--progress  --delete-after -vrza -e ssh '
+	options = '--progress --delete-after -vrza -R -e ssh '
 	
 	destination_commune = os.path.join(config.dossier,site["dossier"])
 	# indiquer les exclusions
@@ -19,20 +19,20 @@ def ssh(site):
 	
 	# créer la requete complete de base
 	
-	requete_base = "rsync " + options + site["login"] + "@" + site["serveur"] + ":" 
-	
-	# l'executer sur chaque dossier
+	requete_base = "rsync " + options + site["login"] + "@" + site["serveur"] + ":'"  
+	requete = requete_base
+	# recuperer plusieurs dossier à la fois
 	for recup in site['recuperation']:
 		# pour avoir bien l'arbo complète en local
 		if recup[-1] != '/':
 			recup += '/'
-		destination = os.path.join(destination_commune,recup)
-		outils.creer_dossier(destination)
 		
-		requete = requete_base + os.path.join(site['base'],recup) + " " + destination
+		requete +=  os.path.join(site['base'],recup) + " "
 		
-		print ("Récup de " + site["dossier"] + " : " + recup)
-		resultats[recup] = os.system(requete)
+	requete += "' " + destination_commune
+	
+	print ("Récup de " + site["dossier"])
+	resultats = os.system(requete)
 	
 	return resultats
 

@@ -19,12 +19,18 @@ def afficher_resultats(resultats):
 	print "\n****\n"
 	for site in resultats:
 		print ("Résultats sur " + site + " :")
-		for recup in resultats[site]:
-			if (resultats[site][recup]!=0):# une erreur
-				print ("\t " + recup + " : " + str(resultats[site][recup]))
+		try:
+			for recup in resultats[site]:
+				if (resultats[site][recup]!=0):# une erreur
+					print ("\t " + recup + " : " + str(resultats[site][recup]))
+				else:
+					print ("\t " + recup + " OK")
+		except:
+			if (resultats[site]!=0):
+				print ("\t " + resultats[site])
 			else:
-				print ("\t " + recup + " OK")
-
+				print ("\t OK")
+		
 
 def creer_dossier(chemin):
 	''' Crée un dossier, si non existant, à partir d'un chemin'''
