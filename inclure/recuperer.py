@@ -54,7 +54,7 @@ def ftp(site):
 		exclusion += "--exclude "+ ex + " " 
 	for recup in site["recuperation"]:
 		cd = "cd " +  os.path.join(site['base'],recup)
-		req = "lftp -c \"set ftp:list-options -a;"
+		req = "lftp -c \"set ftp:list-options -a; set net:max-retries 2;"
 		req += ouverture + ";"
 		req += cd + ";"
 		req += "lcd " + destination + ";"
