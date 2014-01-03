@@ -27,7 +27,7 @@ def afficher_resultats(resultats):
 					print ("\t " + recup + " OK")
 		except:
 			if (resultats[site]!=0):
-				print ("\t " + resultats[site])
+				print ("\t " + str(resultats[site]))
 			else:
 				print ("\t OK")
 		
