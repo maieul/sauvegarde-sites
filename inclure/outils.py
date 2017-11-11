@@ -8,7 +8,7 @@ def pwd(serveur,login):
 	"""Retourne le mdp associé au serveur / login, ou a défaut le demande"""
 	chaine =  login +"@" + serveur
 	pwd  = get_password("sauvegarde " + chaine,login)
-	if pwd==None :
+	if pwd==None or pwd==u'' or config.resetmdp==True :
 		pwd = raw_input("Mot de passe " + chaine + " ? ")
 		set_password("sauvegarde " + chaine,login,pwd)
 	return pwd

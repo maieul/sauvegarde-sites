@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Version 1.1.0
-# Maïeul Rouquette ; 2013-2014
+# Version 1.2.0
+# Maïeul Rouquette ; 2013-*
 # Licence : GNU/GPL 3 (https://www.gnu.org/licenses/gpl.html)
 
 import os
