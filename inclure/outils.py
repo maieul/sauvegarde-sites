@@ -15,7 +15,7 @@ def pwd(serveur,login):
 	
 def afficher_resultats(resultats):
 	'''Affiche le résultat pour l'ensemble des sites'''
-        resultats.sort()
+
 	print "\n****\n"
 	for site in resultats:
 		print ("Résultats sur " + site + " :")

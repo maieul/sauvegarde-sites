@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Version 1.3.0
+# Version 1.2.0
 # Maïeul Rouquette ; 2013-*
 # Licence : GNU/GPL 3 (https://www.gnu.org/licenses/gpl.html)
 
