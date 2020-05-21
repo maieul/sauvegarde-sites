@@ -12,11 +12,11 @@ def pwd(serveur,login):
 		pwd = raw_input("Mot de passe " + chaine + " ? ")
 		set_password("sauvegarde " + chaine,login,pwd)
 	return pwd
-	
+
 def afficher_resultats(resultats):
 	'''Affiche le résultat pour l'ensemble des sites'''
 
-	print "\n****\n"
+	print ("\n****\n")
 	for site in resultats:
 		print ("Résultats sur " + site + " :")
 		try:
@@ -30,7 +30,7 @@ def afficher_resultats(resultats):
 				print ("\t " + str(resultats[site]))
 			else:
 				print ("\t OK")
-		
+
 
 def creer_dossier(chemin):
 	''' Crée un dossier, si non existant, à partir d'un chemin'''
@@ -40,7 +40,7 @@ def creer_dossier(chemin):
 	except  OSError:
 		pass
 	except:
-		print ("Erreur inconnue lors de la création de " + chemin + " " + sys.exc_info()[0])	
+		print ("Erreur inconnue lors de la création de " + chemin + " " + sys.exc_info()[0])
 
 
 
