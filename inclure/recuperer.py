@@ -57,7 +57,7 @@ def ftp(site):
 		req = "lftp -c \"set ftp:list-options -a; set net:max-retries 2;"
 		req += ouverture + ";"
 		if 'lftpopen' in site:
- 			req = req + site['lftpc']
+ 			req = req + site['lftpopen']
 		req += cd + ";"
 		req += "lcd " + destination + ";"
 		req += "mirror --delete --verbose " + exclusion
