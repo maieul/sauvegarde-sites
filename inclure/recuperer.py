@@ -4,7 +4,6 @@
 import os
 import config
 import inclure.outils as outils
-
 def ssh(site):
 	''' récupere le contenu d'un site via SSH (rsync)'''
 	resultats = {}
@@ -57,7 +56,7 @@ def ftp(site):
 		req = "lftp -c \"set ftp:list-options -a; set net:max-retries 2;"
 		req += ouverture + ";"
 		if 'lftpopen' in site:
- 			req = req + site['lftpopen']
+ 			req = req + site['lftpopen'] + ';'
 		req += cd + ";"
 		req += "lcd " + destination + ";"
 		req += "mirror --delete --verbose " + exclusion
