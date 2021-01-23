@@ -9,7 +9,7 @@ def pwd(serveur,login):
 	chaine =  login +"@" + serveur
 	pwd  = get_password("sauvegarde " + chaine,login)
 	if pwd==None or pwd==u'' or config.resetmdp==True :
-		pwd = raw_input("Mot de passe " + chaine + " ? ")
+		pwd = input("Mot de passe " + chaine + " ? ")
 		set_password("sauvegarde " + chaine,login,pwd)
 	return pwd
 
