@@ -8,7 +8,7 @@
 import os
 import config
 import inclure.recuperer as recuperer
-
+import sys
 from inclure.outils import *
 
 
@@ -27,17 +27,20 @@ def main():
 
 
 	#2a
+	if len(sys.argv) > 1:
+		todo = sys.argv[1:]
 	resultats = {}
 	for site in config.sites:
-		resultat={}
-		creer_dossier (os.path.join(config.dossier,site["dossier"]))
+		if todo is None or site['dossier'] in todo:
+			resultat={}
+			creer_dossier (os.path.join(config.dossier,site["dossier"]))
 
-		if site['mode'].upper() == 'SSH':
-			resultat = recuperer.ssh(site)
-		elif site['mode'].upper() == 'FTP':
-			resultat = recuperer.ftp(site)
+			if site['mode'].upper() == 'SSH':
+				resultat = recuperer.ssh(site)
+			elif site['mode'].upper() == 'FTP':
+				resultat = recuperer.ftp(site)
 
-		resultats[site["dossier"]] = resultat
+			resultats[site["dossier"]] = resultat
 
 	afficher_resultats(resultats)
 
