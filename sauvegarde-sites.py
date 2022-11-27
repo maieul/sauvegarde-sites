@@ -12,33 +12,33 @@ import inclure.recuperer as recuperer
 from inclure.outils import *
 
 
-	
+
 def main():
-	'''Fonction principale, qui se contente de 
+	'''Fonction principale, qui se contente de
 		1. Créer le dossier ad hoc si besoin.
-		2. Tourner sur l'ensemble des sites, pour 
+		2. Tourner sur l'ensemble des sites, pour
 			a. Créer si besoin le dossier
 			b. Appeler ensuite la fonction ad hoc
 		3. Appeler l'affichage des erreurs
 	'''
-	
-	#1 
+
+	#1
 	creer_dossier(config.dossier)
-	
-	
+
+
 	#2a
 	resultats = {}
 	for site in config.sites:
 		resultat={}
 		creer_dossier (os.path.join(config.dossier,site["dossier"]))
-		
+
 		if site['mode'].upper() == 'SSH':
 			resultat = recuperer.ssh(site)
 		elif site['mode'].upper() == 'FTP':
 			resultat = recuperer.ftp(site)
-		
+
 		resultats[site["dossier"]] = resultat
-	
+
 	afficher_resultats(resultats)
 
 main()
