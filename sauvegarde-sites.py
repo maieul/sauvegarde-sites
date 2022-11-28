@@ -27,11 +27,12 @@ def main():
 
 
 	#2a
+	todo = []
 	if len(sys.argv) > 1:
 		todo = sys.argv[1:]
 	resultats = {}
 	for site in config.sites:
-		if todo is None or site['dossier'] in todo:
+		if todo == [] or site['dossier'] in todo:
 			resultat={}
 			creer_dossier (os.path.join(config.dossier,site["dossier"]))
 
