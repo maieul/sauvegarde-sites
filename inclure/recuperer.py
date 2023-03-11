@@ -18,20 +18,20 @@ def ssh(site):
 
 	# créer la requete complete de base
 
-	requete_base = "rsync " + options + site["login"] + "@" + site["serveur"] + ":'"
-	requete = requete_base
-	# recuperer plusieurs dossier à la fois
+	requete_base = "rsync " + options + site["login"] + "@" + site["serveur"] + ":"
+	print ("Récup de " + site["dossier"])
+
+	# recuperer tous les dossiers 1 par 1
 	for recup in site['recuperation']:
+		requete = requete_base
 		# pour avoir bien l'arbo complète en local
 		if recup[-1] != '/':
 			recup += '/'
 
-		requete +=  os.path.join(site['base'],recup) + " "
+		requete +=  "'" + os.path.join(site['base'],recup) + "' " + destination_commune
 
-	requete += "' " + destination_commune
 
-	print ("Récup de " + site["dossier"])
-	resultats = os.system(requete)
+		resultats[recup] = os.system(requete)
 
 	return resultats
 
